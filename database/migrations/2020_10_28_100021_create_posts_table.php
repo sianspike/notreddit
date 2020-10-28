@@ -17,8 +17,8 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('body');
-            //add user id
-            //add comment id's
+            $table->integer('userID');
+            $table->integer(array('commentID'));
             $table->timestamps();
         });
     }
