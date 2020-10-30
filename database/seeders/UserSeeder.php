@@ -20,6 +20,6 @@ class UserSeeder extends Seeder
         $test_user_one->password = '1234';
         $test_user_one->save();
 
-        factory(App\Models\User::class, 50)->create();
+        $users = User::factory()->count(50)->create();
     }
 }
