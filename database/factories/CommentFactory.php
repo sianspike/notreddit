@@ -25,8 +25,8 @@ class CommentFactory extends Factory
     {
         return [
             'body' => $this->faker->sentence($nbWords=10, $variableNbWords = true),
-            'user_id' => User::inRandomOrder()->first()->id,//$this->faker->numberBetween($min = 1, $max = 50),
-            'post_id' => Post::inRandomOrder()->first()->id,//$this->faker->numberBetween($min = 1, $max = 50),
+            'user_id' => User::inRandomOrder()->first()->id,
+            'post_id' => Post::inRandomOrder()->first()->id,
         ];
     }
 }

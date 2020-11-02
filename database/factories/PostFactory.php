@@ -25,7 +25,8 @@ class PostFactory extends Factory
         return [
             'title' => $this->faker->sentence($nbWords=5, $variableNbWords = true),
             'body' => $this->faker->paragraph($nbSentences=1, $variableNbSentences = true),
-            'user_id' => User::inRandomOrder()->first()->id,//$this->faker->numberBetween($min = 1, $max = 50),
+            'image_url' => $this->faker->imageUrl($width=640, $height=480),
+            'user_id' => User::inRandomOrder()->first()->id,
         ];
     }
 }
