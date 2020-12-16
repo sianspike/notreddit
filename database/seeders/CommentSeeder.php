@@ -20,6 +20,6 @@ class CommentSeeder extends Seeder
         $test_comment_one->post_id = 1;
         $test_comment_one->save();
 
-        $comments = Comment::factory()->count(50)->create();
+        $comments = Comment::factory()->count(10)->create();
     }
 }

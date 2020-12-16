@@ -13,12 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'App\Http\Controllers\PostController@index') -> middleware(['auth'])
+    -> name('posts.index');;
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', 'App\Http\Controllers\PostController@index') -> middleware(['auth'])
+    -> name('posts.index');
+
+Route::get('/dashboard/create', 'App\Http\Controllers\PostController@create') -> middleware(['auth'])
+    -> name('posts.create');
+
+Route::post('/dashboard', 'App\Http\Controllers\PostController@store') -> middleware(['auth'])
+    -> name('posts.store');
+
+Route::get('dashboard/{id}', 'App\Http\Controllers\PostController@show') -> middleware(['auth'])
+    -> name('posts.show');
 
 require __DIR__.'/auth.php';

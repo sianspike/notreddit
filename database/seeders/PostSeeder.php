@@ -20,6 +20,6 @@ class PostSeeder extends Seeder
         $test_post_one->user_id = 1;
         $test_post_one->save();
 
-        $posts = Post::factory()->count(50)->create();
+        $posts = Post::factory()->count(10)->create();
     }
 }
