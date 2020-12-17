@@ -44,13 +44,17 @@ class PostController extends Controller
         ]);
         $user = Auth::user();
 
+        $path = $request -> file('image_url') -> store('public/images');
+
         $post = new Post;
         $post -> title = $validatedData['title'];
         $post -> body = $validatedData['body'];
+        $post -> image_url = $path;
         $post -> user_id = $user -> id;
+
         $post -> save();
 
-        session() -> flash('message', 'Post succesfully created!');
+        session() -> flash('message', 'Post successfully created!');
 
         return redirect() -> route('posts.index');
     }
@@ -64,7 +68,6 @@ class PostController extends Controller
     public function show($id) {
 
         $post = Post::findOrFail($id);
-
         return view('posts.show', ['post' => $post]);
     }
 

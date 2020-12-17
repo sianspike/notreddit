@@ -9,7 +9,7 @@
         </div>
         <div class="card-body">
             <p class="card-text">{{ $post -> body }}</p>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/TapetumLucidum.JPG/440px-TapetumLucidum.JPG">
+            <img src="{{ Storage::url($post -> image_url) }}">
         </div>
         <div class="card-footer">
             @foreach(($post -> comments) as $comment)

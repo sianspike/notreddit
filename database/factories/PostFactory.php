@@ -17,7 +17,7 @@ class PostFactory extends Factory
 
     /**
      * Define the model's default state.
-     * 
+     *
      * @return array
      */
     public function definition()
@@ -25,7 +25,7 @@ class PostFactory extends Factory
         return [
             'title' => $this->faker->sentence($nbWords=5, $variableNbWords = true),
             'body' => $this->faker->paragraph($nbSentences=1, $variableNbSentences = true),
-            'image_url' => $this->faker->imageUrl($width=640, $height=480),
+            'image_url' => $this->faker->image($dir = null, $width=640, $height=480, null, null),
             'user_id' => User::inRandomOrder()->first()->id,
         ];
     }
