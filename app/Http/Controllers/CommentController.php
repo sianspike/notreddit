@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Post;
 
-class PostController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-
-        $posts = Post::all();
-
-        return view('posts.index', ['posts' => $posts]);
+    public function index()
+    {
+        //
     }
 
     /**
@@ -25,34 +23,35 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
-
-        return view('posts.create');
+    public function create()
+    {
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     * @param $id - post ID
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request, $id) {
 
-        $validatedData = $request-> validate([
-            'title' => 'required|max:100',
-            'body' => 'required',
+        $validatedData = $request -> validate([
+            'comment' => 'required',
         ]);
+
         $user = Auth::user();
 
-        $post = new Post;
-        $post -> title = $validatedData['title'];
-        $post -> body = $validatedData['body'];
-        $post -> user_id = $user -> id;
-        $post -> save();
+        $comment = new Comment;
+        $comment -> body = $validatedData['comment'];
+        $comment -> user_id = $user -> id;
+        $comment -> post_id = $id;
+        $comment -> save();
 
-        session() -> flash('message', 'Post succesfully created!');
+        session() -> flash('message', 'Comment succesfully created!');
 
-        return redirect() -> route('posts.index');
+        return redirect() -> route('posts.show', ['id' => $comment -> post_id]);
     }
 
     /**
@@ -61,11 +60,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
-
-        $post = Post::findOrFail($id);
-
-        return view('posts.show', ['post' => $post]);
+    public function show($id)
+    {
+        //
     }
 
     /**

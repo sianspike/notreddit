@@ -25,7 +25,10 @@ Route::get('/dashboard/create', 'App\Http\Controllers\PostController@create') ->
 Route::post('/dashboard', 'App\Http\Controllers\PostController@store') -> middleware(['auth'])
     -> name('posts.store');
 
-Route::get('dashboard/{id}', 'App\Http\Controllers\PostController@show') -> middleware(['auth'])
+Route::get('/dashboard/{id}', 'App\Http\Controllers\PostController@show') -> middleware(['auth'])
     -> name('posts.show');
+
+Route::post('/dashboard/{id}', 'App\Http\Controllers\CommentController@store') -> middleware(['auth'])
+    -> name('comments.store');
 
 require __DIR__.'/auth.php';

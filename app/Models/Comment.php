@@ -9,6 +9,10 @@ class Comment extends Model
 {
     use HasFactory;
 
+    private $body;
+    private $user_id;
+    private $post_id;
+
     public function user() {
 
         return $this->belongsTo('App\Models\User');
