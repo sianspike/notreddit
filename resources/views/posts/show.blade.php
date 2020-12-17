@@ -2,6 +2,7 @@
 
 @section('content')
 
+    <!-- Add edit button to post-->
     <div class="card" style="width: 65rem; margin: 1rem 10rem 2rem;">
         <div class="card-header">
             <h5 class="card-title">{{ $post -> title }}</h5>
@@ -11,6 +12,8 @@
             <p class="card-text">{{ $post -> body }}</p>
             <img src="{{ Storage::url($post -> image_url) }}">
         </div>
+        <!-- Convert to AJAX -->
+        <!-- Add edit button to comments -->
         <div class="card-footer">
             @foreach(($post -> comments) as $comment)
                 <p class="card-text" style="font-size: 0.7rem; color: #5c636a">{{ $comment -> user -> username }}</p>
