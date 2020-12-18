@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,10 +33,10 @@ class CommentController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param $id - post ID
+     * @param Post $post
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id) {
+    public function store(Request $request, Post $post) {
 
         $validatedData = $request -> validate([
             'comment' => 'required',
@@ -46,12 +47,12 @@ class CommentController extends Controller
         $comment = new Comment;
         $comment -> body = $validatedData['comment'];
         $comment -> user_id = $user -> id;
-        $comment -> post_id = $id;
+        $comment -> post_id = $post -> id;
         $comment -> save();
 
         session() -> flash('message', 'Comment succesfully created!');
 
-        return redirect() -> route('posts.show', ['id' => $comment -> post_id]);
+        return redirect() -> route('posts.show', ['post' => $post]);
     }
 
     /**
@@ -68,24 +69,35 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Comment $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(Post $post, Comment $comment) {
+
+        return view('comments.edit', ['post' => $post, 'comment' => $comment]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param Post $post
+     * @param Comment $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, Post $post, Comment $comment) {
+
+        $validatedData = $request -> validate([
+            'body' => 'required',
+        ]);
+
+        $newComment = $comment;
+        $newComment -> body = $validatedData['body'];
+        $newComment -> save();
+
+        session() -> flash('message', 'Comment successfully edited!');
+
+        return view('posts.show', ['post' => $post]);
     }
 
     /**

@@ -43,8 +43,12 @@ class PostController extends Controller
             'body' => 'required',
         ]);
         $user = Auth::user();
+        $path = "";
 
-        $path = $request -> file('image_url') -> store('public/images');
+        if ($request -> hasFile('image_url')) {
+
+            $path = $request -> file('image_url') -> store('public/images');
+        }
 
         $post = new Post;
         $post -> title = $validatedData['title'];
@@ -62,36 +66,57 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Post $post
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
+    public function show(Post $post) {
 
-        $post = Post::findOrFail($id);
         return view('posts.show', ['post' => $post]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(Post $post) {
+
+        return view('posts.edit', ['post' => $post]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param Post $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, Post $post) {
+
+        $validatedData = $request-> validate([
+            'title' => 'required|max:100',
+            'body' => 'required',
+        ]);
+
+        $path = "";
+
+        if ($request -> hasFile('image_url')) {
+
+            $path = $request -> file('image_url') -> store('public/images');
+        }
+
+        $newPost = $post;
+        $newPost -> title = $validatedData['title'];
+        $newPost -> body = $validatedData['body'];
+        $newPost -> image_url = $path;
+        $newPost -> user_id = $post -> user_id;
+
+        $newPost -> save();
+
+        session() -> flash('message', 'Post successfully updated!');
+
+        return redirect() -> route('posts.index');
     }
 
     /**

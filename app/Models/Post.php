@@ -13,6 +13,7 @@ class Post extends Model
     private $body;
     private $user_id;
     private $image_url;
+    private $id;
 
     public function user() {
 
