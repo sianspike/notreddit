@@ -82,7 +82,15 @@ class PostController extends Controller
      */
     public function edit(Post $post) {
 
-        return view('posts.edit', ['post' => $post]);
+        $user = Auth::user();
+
+        if ($post -> user_id == $user -> id) {
+
+            return view('posts.edit', ['post' => $post]);
+        }
+
+        session() -> flash('message', 'Not authorised to edit this post!');
+        return redirect() -> route('posts.index');
     }
 
     /**

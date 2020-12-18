@@ -2,6 +2,14 @@
 
 @section('content')
 
+    @if (session() -> has('message'))
+
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            {{session() -> get('message')}}
+        </div>
+    @endif
+
     <div class="container">
         <ul>
             @foreach($posts as $post)
@@ -11,7 +19,7 @@
                         <h5 class="card-title">{{ $post -> title }}</h5>
                         <p class="card-text" style="color: #5c636a; display: inline-block">Posted by: {{ $post -> user -> username }}</p>
                         <p class="card-text" style="display: inline-block; color: #5c636a; margin-left: 55rem; font-size: 0.7rem">
-                            {{ $post -> created_at }}
+                            {{ $post -> updated_at }}
                         </p>
                     </div>
 

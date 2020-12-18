@@ -74,7 +74,15 @@ class CommentController extends Controller
      */
     public function edit(Post $post, Comment $comment) {
 
-        return view('comments.edit', ['post' => $post, 'comment' => $comment]);
+        $user = Auth::user();
+
+        if ($comment -> user_id == $user -> id) {
+
+            return view('comments.edit', ['post' => $post, 'comment' => $comment]);
+        }
+
+        session() -> flash('message', 'Not authorised to edit this comment!');
+        return  redirect() -> route('posts.show', ['post' => $post]);
     }
 
     /**

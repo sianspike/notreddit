@@ -2,6 +2,14 @@
 
 @section('content')
 
+    @if (session() -> has('message'))
+
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            {{session() -> get('message')}}
+        </div>
+    @endif
+
     <div class="card" style="width: 65rem; margin: 1rem 10rem 2rem;">
         <div class="card-header">
             <a href="{{ route('posts.edit', ['post' => $post]) }}" style="display:inline-block; margin-left: 61rem; font-size: 0.7rem; color: black">Edit</a>
