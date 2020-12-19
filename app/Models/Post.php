@@ -15,6 +15,7 @@ class Post extends Model
     private $image_url;
     private $id;
 
+
     public function user() {
 
         return $this->belongsTo('App\Models\User');

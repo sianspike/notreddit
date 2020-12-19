@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Post;
+use App\Notifications\UserMadeComment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CommentController extends Controller
-{
+class CommentController extends Controller {
     /**
      * Display a listing of the resource.
      *
@@ -50,7 +50,8 @@ class CommentController extends Controller
         $comment -> post_id = $post -> id;
         $comment -> save();
 
-        session() -> flash('message', 'Comment succesfully created!');
+        session() -> flash('message', 'Comment successfully created!');
+        event(new UserMadeComment($user, $comment));
 
         return redirect() -> route('posts.show', ['post' => $post]);
     }

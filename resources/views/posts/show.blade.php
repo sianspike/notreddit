@@ -58,7 +58,7 @@
                     url: "{{ route('comments.store', ['post' => $post]) }}",
                     type:'POST',
                     data: {_token:_token, comment:comment},
-                    success: function(data) {
+                    success: function() {
                         location.reload()
                     }
                 });

@@ -37,7 +37,7 @@ Route::get('/dashboard/{post}', 'App\Http\Controllers\PostController@show') -> m
 Route::get('/dashboard/edit/{post}/{comment}', 'App\Http\Controllers\CommentController@edit') -> middleware(['auth'])
     -> name('comments.edit');
 
-Route::post('/dashboard/{post}/add', 'App\Http\Controllers\CommentController@store') -> middleware(['auth'])
+Route::post('/dashboard/{post}', 'App\Http\Controllers\CommentController@store') -> middleware(['auth'])
     -> name('comments.store');
 
 Route::post('/dashboard/{post}/{comment}', 'App\Http\Controllers\CommentController@update') -> middleware(['auth'])

@@ -16,6 +16,25 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+
+        <!-- Pusher notifications -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+{{--        <script>--}}
+
+{{--            // Enable pusher logging - don't include this in production--}}
+{{--            Pusher.logToConsole = true;--}}
+
+{{--            const pusher = new Pusher('740963311434c70e9665', {--}}
+{{--                cluster: 'eu'--}}
+{{--            });--}}
+
+{{--            const channel = pusher.subscribe('my-channel');--}}
+{{--            channel.bind('my-event', function(data) {--}}
+{{--                //This is where the notification needs to appear in navigation bar--}}
+{{--                alert(JSON.stringify(data));--}}
+{{--            });--}}
+{{--        </script>--}}
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
