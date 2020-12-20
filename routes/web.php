@@ -43,4 +43,7 @@ Route::post('/dashboard/{post}', 'App\Http\Controllers\CommentController@store')
 Route::post('/dashboard/{post}/{comment}', 'App\Http\Controllers\CommentController@update') -> middleware(['auth'])
     -> name('comments.update');
 
+Route::delete('/dashboard/{notification}', 'App\Http\Controllers\NotificationController@destroy') -> middleware(['auth'])
+    -> name('notifications.destroy');
+
 require __DIR__.'/auth.php';

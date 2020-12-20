@@ -55,7 +55,7 @@
                 const comment = $("#comment").val();
 
                 $.ajax({
-                    url: "{{ route('comments.store', ['post' => $post]) }}",
+                    url: "{{ route('comments.store', ['post' => $post, 'notifications' => $notifications]) }}",
                     type:'POST',
                     data: {_token:_token, comment:comment},
                     success: function() {

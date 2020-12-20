@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
@@ -16,8 +17,9 @@ class PostController extends Controller {
     public function index() {
 
         $posts = Post::paginate(15);
+        $notifications = Notification::all();
 
-        return view('posts.index', ['posts' => $posts]);
+        return view('posts.index', ['posts' => $posts, 'notifications' => $notifications]);
     }
 
     /**
@@ -27,7 +29,9 @@ class PostController extends Controller {
      */
     public function create() {
 
-        return view('posts.create');
+        $notifications = Notification::all();
+
+        return view('posts.create', ['notifications' => $notifications]);
     }
 
     /**
@@ -71,7 +75,9 @@ class PostController extends Controller {
      */
     public function show(Post $post) {
 
-        return view('posts.show', ['post' => $post]);
+        $notifications = Notification::all();
+
+        return view('posts.show', ['post' => $post, 'notifications' => $notifications]);
     }
 
     /**

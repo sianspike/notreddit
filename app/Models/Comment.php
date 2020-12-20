@@ -12,6 +12,7 @@ class Comment extends Model
     private $body;
     private $user_id;
     private $post_id;
+    private $post;
 
     public function user() {
 

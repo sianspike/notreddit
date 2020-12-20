@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Notification;
 use App\Models\Post;
 use App\Notifications\UserMadeComment;
 use Illuminate\Http\Request;
@@ -38,6 +39,8 @@ class CommentController extends Controller {
      */
     public function store(Request $request, Post $post) {
 
+        $notifications = Notification::all();
+
         $validatedData = $request -> validate([
             'comment' => 'required',
         ]);
@@ -51,9 +54,10 @@ class CommentController extends Controller {
         $comment -> save();
 
         session() -> flash('message', 'Comment successfully created!');
+
         event(new UserMadeComment($user, $comment));
 
-        return redirect() -> route('posts.show', ['post' => $post]);
+        return redirect() -> route('posts.show', ['post' => $post, 'notifications' => $notifications]);
     }
 
     /**

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
+
+use App\Models\Notification;
 
 class NotificationController extends Controller {
 
@@ -15,19 +15,17 @@ class NotificationController extends Controller {
         return view('posts.index');
     }
 
-    public function sendNotification() {
+    public function destroy(Notification $notification) {
 
-        $data = [
-            'username' => 'BOGO',
-            'body' => 'You received an offer.',
-            'thanks' => 'Thank you',
-            'offerText' => 'Check out the offer',
-            'offerUrl' => url('/'),
-            'offer_id' => 007
-        ];
+        try {
 
-        Notification::send($userSchema, new OffersNotification($offerData));
+            $notification->delete();
 
-        dd('Task completed!');
+            return redirect() -> back();
+
+        } catch (\Exception $e) {
+
+            session() -> flash('message', 'There was a problem.');
+        }
     }
 }

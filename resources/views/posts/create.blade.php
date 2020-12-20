@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'Create Post')
-
 @section('content')
 
     <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">

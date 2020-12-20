@@ -32,6 +32,9 @@ class User extends Authenticatable {
         'remember_token',
     ];
 
+    private $username;
+    private $id;
+
     public function posts() {
 
         return $this->hasMany('App\Models\Post');
@@ -40,5 +43,10 @@ class User extends Authenticatable {
     public function comments() {
 
         return $this->hasMany('App\Models\Comment');
+    }
+
+    public function notifications() {
+
+        return $this->hasMany('App\Models\Notification');
     }
 }
