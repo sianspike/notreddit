@@ -82,7 +82,7 @@ class CommentController extends Controller {
         $user = Auth::user();
         $notifications = Notification::all();
 
-        if ($comment -> user_id == $user -> id) {
+        if ($comment -> user_id == $user -> id || $user -> role == 'admin') {
 
             return view('comments.edit', ['post' => $post, 'comment' => $comment, 'notifications' => $notifications]);
         }

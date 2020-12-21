@@ -108,7 +108,7 @@ class PostController extends Controller {
         $tags = Tag::all();
         $notifications = Notification::all();
 
-        if ($post -> user_id == $user -> id) {
+        if ($post -> user_id == $user -> id || $user -> role == 'admin') {
 
             return view('posts.edit', ['post' => $post, 'tags' => $tags, 'notifications' => $notifications]);
         }

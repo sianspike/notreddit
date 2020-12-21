@@ -34,6 +34,9 @@ class User extends Authenticatable {
 
     private $username;
     private $id;
+    private $email;
+    private $password;
+    private $role;
 
     public function posts() {
 
