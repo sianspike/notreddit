@@ -30,9 +30,11 @@
                         </div>
                     </a>
 
-                    <!-- Add functionality to expand comments -->
+                    <!-- Tags -->
                     <div class="card-footer">
-                        <a href="" style="text-decoration: none; color: black"><p class="card-text">Comments</p></a>
+                        @foreach($post -> tags as $tag)
+                            <p style="display: inline">{{ $tag -> name }}</p>
+                        @endforeach
                     </div>
                 </div>
             @endforeach

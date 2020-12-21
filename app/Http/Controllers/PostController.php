@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notification;
+use App\Models\Tag;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
@@ -18,8 +20,9 @@ class PostController extends Controller {
 
         $posts = Post::paginate(15);
         $notifications = Notification::all();
+        $tags = Tag::all();
 
-        return view('posts.index', ['posts' => $posts, 'notifications' => $notifications]);
+        return view('posts.index', ['posts' => $posts, 'notifications' => $notifications, 'tags' => $tags]);
     }
 
     /**
@@ -30,8 +33,9 @@ class PostController extends Controller {
     public function create() {
 
         $notifications = Notification::all();
+        $tags = Tag::all();
 
-        return view('posts.create', ['notifications' => $notifications]);
+        return view('posts.create', ['notifications' => $notifications, 'tags' => $tags]);
     }
 
     /**
@@ -48,6 +52,8 @@ class PostController extends Controller {
         ]);
         $user = Auth::user();
         $path = "";
+        $tags = Tag::all();
+        $chosenTags = $request -> tags;
 
         if ($request -> hasFile('image_url')) {
 
@@ -59,8 +65,18 @@ class PostController extends Controller {
         $post -> body = $validatedData['body'];
         $post -> image_url = $path;
         $post -> user_id = $user -> id;
-
         $post -> save();
+
+        foreach($chosenTags as $chosenTag) {
+
+            foreach($tags as $tag) {
+
+                if ($chosenTag == $tag -> name) {
+
+                    $tag -> posts() -> attach($post -> id);
+                }
+            }
+        }
 
         session() -> flash('message', 'Post successfully created!');
 
@@ -89,14 +105,16 @@ class PostController extends Controller {
     public function edit(Post $post) {
 
         $user = Auth::user();
+        $tags = Tag::all();
+        $notifications = Notification::all();
 
         if ($post -> user_id == $user -> id) {
 
-            return view('posts.edit', ['post' => $post]);
+            return view('posts.edit', ['post' => $post, 'tags' => $tags, 'notifications' => $notifications]);
         }
 
         session() -> flash('message', 'Not authorised to edit this post!');
-        return redirect() -> route('posts.index');
+        return redirect() -> route('posts.index', ['tags' => $tags, 'notifications' => $notifications]);
     }
 
     /**
@@ -114,6 +132,16 @@ class PostController extends Controller {
         ]);
 
         $path = "";
+        $tags = Tag::all();
+        $chosenTags = $request -> tags;
+
+        if ($chosenTags != null) {
+
+            foreach($tags as $tag) {
+
+                $tag -> posts() -> detach($post -> id);
+            }
+        }
 
         if ($request -> hasFile('image_url')) {
 
@@ -125,8 +153,25 @@ class PostController extends Controller {
         $newPost -> body = $validatedData['body'];
         $newPost -> image_url = $path;
         $newPost -> user_id = $post -> user_id;
-
         $newPost -> save();
+
+        foreach($chosenTags as $chosenTag) {
+
+            foreach($tags as $tag) {
+
+                if ($chosenTag == $tag -> name) {
+
+                    try {
+
+                        $tag -> posts() -> attach($post -> id);
+
+                    } catch (QueryException $e) {
+
+
+                    }
+                }
+            }
+        }
 
         session() -> flash('message', 'Post successfully updated!');
 

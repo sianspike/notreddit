@@ -28,7 +28,7 @@ Route::get('/dashboard/edit/{post}', 'App\Http\Controllers\PostController@edit')
 Route::post('/dashboard', 'App\Http\Controllers\PostController@store') -> middleware(['auth'])
     -> name('posts.store');
 
-Route::post('/dashboard/{post}', 'App\Http\Controllers\PostController@update') -> middleware(['auth'])
+Route::post('/dashboard/edit/{post}', 'App\Http\Controllers\PostController@update') -> middleware(['auth'])
     -> name('posts.update');
 
 Route::get('/dashboard/{post}', 'App\Http\Controllers\PostController@show') -> middleware(['auth'])

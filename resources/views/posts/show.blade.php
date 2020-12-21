@@ -22,6 +22,10 @@
         <div class="card-body">
             <p class="card-text">{{ $post -> body }}</p>
             <img src="{{ Storage::url($post -> image_url) }}" alt="">
+            <hr>
+            @foreach($post -> tags as $tag)
+                <p style="display: inline; color: #5c636a; font-size: 0.7rem">{{ $tag -> name }}</p>
+            @endforeach
         </div>
 
         <div class="card-footer">
