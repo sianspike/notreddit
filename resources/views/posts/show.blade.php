@@ -41,8 +41,9 @@
 
             <form method="POST">
                 @csrf
-                <p><input type="text" name="comment" id="comment"></p>
-                <input type="submit" value="Submit" class="submit">
+                <label for="comment" class="visually-hidden">Comment</label>
+                <input type="text" name="comment" id="comment" placeholder="New comment" class="form-control" style="margin-top: 1rem; margin-bottom: 1rem;">
+                <input type="submit" value="Submit" class="submit w-100 btn btn-lg btn-primary">
             </form>
         </div>
     </div>

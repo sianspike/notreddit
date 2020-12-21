@@ -13,12 +13,12 @@
     <div class="container">
         <ul>
             @foreach($posts as $post)
-                <div class="card" style="width: 65rem; margin: 1rem 10rem 2rem;">
+                <div class="card text-center border-info" style="width: 50%; margin: 1rem auto;">
                     <div class="card-header">
-                        <a href="{{ route('posts.edit', ['post' => $post]) }}" style="display:inline-block; margin-left: 61rem; font-size: 0.7rem; color: black">Edit</a>
+                        <a href="{{ route('posts.edit', ['post' => $post]) }}" style="display:inline-block; margin-left: 95%; font-size: 0.7rem; color: black">Edit</a>
                         <h5 class="card-title">{{ $post -> title }}</h5>
                         <p class="card-text" style="color: #5c636a; display: inline-block">Posted by: {{ $post -> user -> username }}</p>
-                        <p class="card-text" style="display: inline-block; color: #5c636a; margin-left: 55rem; font-size: 0.7rem">
+                        <p class="card-text" style="display: inline-block; color: #5c636a; margin-left: 80%; font-size: 0.7rem">
                             {{ $post -> updated_at }}
                         </p>
                     </div>

@@ -46,7 +46,7 @@
                         {{ Auth::user()->username }}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <form method="POST" action="{{ route('logout') }}">
+                        <form method="POST" action="{{ route('logout') }}" style="margin: 0.2rem auto; width: 50%; text-align: center;">
                             @csrf
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <button type="submit">Logout</button>
