@@ -181,11 +181,22 @@ class PostController extends Controller {
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Post $post
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(Post $post) {
+
+        try {
+
+            $post -> delete();
+            session() -> flash('message', 'Post successfully deleted!');
+
+            return redirect() -> route('posts.index');
+
+        } catch (\Exception $e) {
+
+            session() -> flash('message', 'There was a problem.');
+        }
     }
 }

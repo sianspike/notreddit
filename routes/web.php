@@ -46,4 +46,10 @@ Route::post('/dashboard/{post}/{comment}', 'App\Http\Controllers\CommentControll
 Route::delete('/dashboard/{notification}', 'App\Http\Controllers\NotificationController@destroy') -> middleware(['auth'])
     -> name('notifications.destroy');
 
+Route::delete('/dashboard/delete/{post}', 'App\Http\Controllers\PostController@destroy') -> middleware(['auth'])
+    -> name('posts.destroy');
+
+Route::delete('/dashboard/{post}/{comment}', 'App\Http\Controllers\CommentController@destroy') -> middleware(['auth'])
+    -> name('comments.destroy');
+
 require __DIR__.'/auth.php';

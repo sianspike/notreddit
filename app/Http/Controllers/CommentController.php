@@ -80,14 +80,15 @@ class CommentController extends Controller {
     public function edit(Post $post, Comment $comment) {
 
         $user = Auth::user();
+        $notifications = Notification::all();
 
         if ($comment -> user_id == $user -> id) {
 
-            return view('comments.edit', ['post' => $post, 'comment' => $comment]);
+            return view('comments.edit', ['post' => $post, 'comment' => $comment, 'notifications' => $notifications]);
         }
 
         session() -> flash('message', 'Not authorised to edit this comment!');
-        return  redirect() -> route('posts.show', ['post' => $post]);
+        return  redirect() -> route('posts.show', ['post' => $post, 'notifications' => $notifications]);
     }
 
     /**
@@ -116,11 +117,21 @@ class CommentController extends Controller {
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Comment $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(Post $post, Comment $comment) {
+
+        try {
+
+            $comment -> delete();
+            session() -> flash('message', 'Comment successfully deleted!');
+
+            return redirect() -> route('posts.show', ['post' => $post]);
+
+        } catch (\Exception $e) {
+
+            session() -> flash('message', 'There was a problem.');
+        }
     }
 }

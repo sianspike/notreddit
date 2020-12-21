@@ -18,4 +18,10 @@
         <input type="submit" value="Submit">
         <a href="{{ route('posts.index') }}">Cancel</a>
     </form>
+
+    <form method="POST" action="{{ route('posts.destroy', ['post' => $post]) }}">
+        @csrf
+        @method('DELETE')
+        <button type="submit">Delete</button>
+    </form>
 @endsection
