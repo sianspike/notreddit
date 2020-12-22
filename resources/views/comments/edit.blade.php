@@ -8,7 +8,7 @@
         <label for="body" class="visually-hidden">Body</label>
         <input id="body" type="text" name="body" value="{{ $comment -> body }}" class="form-control" style="margin-top: 1rem; margin-bottom: 1rem;">
         <input type="submit" value="Submit" style="margin-top: 1rem; margin-bottom: 1rem;" class="w-100 btn btn-lg btn-primary">
-        <a href="{{ route('posts.show', ['post' => $post]) }}" style="margin-top: 1rem; margin-bottom: 1rem;">Cancel</a>
+        <a href="{{ route('posts.show', ['post' => $post, 'notifications' => $notifications]) }}" style="margin-top: 1rem; margin-bottom: 1rem;">Cancel</a>
     </form>
 
     <!-- Delete comment -->

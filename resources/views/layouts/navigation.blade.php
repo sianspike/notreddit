@@ -43,7 +43,7 @@
                 <!-- User dropdown -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ Auth::user()->username }}
+                        {{ Auth::user()->username }} ({{Auth::user()->role}})
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <form method="POST" action="{{ route('logout') }}" style="margin: 0.2rem auto; width: 50%; text-align: center;">

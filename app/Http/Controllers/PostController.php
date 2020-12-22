@@ -18,7 +18,7 @@ class PostController extends Controller {
      */
     public function index() {
 
-        $posts = Post::paginate(15);
+        $posts = Post::paginate(5);
         $notifications = Notification::all();
         $tags = Tag::all();
 
@@ -46,10 +46,11 @@ class PostController extends Controller {
      */
     public function store(Request $request) {
 
-        $validatedData = $request-> validate([
+        $validatedData = $request -> validate([
             'title' => 'required|max:100',
             'body' => 'required',
         ]);
+
         $user = Auth::user();
         $path = "";
         $tags = Tag::all();

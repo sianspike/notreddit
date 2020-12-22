@@ -102,6 +102,8 @@ class CommentController extends Controller {
      */
     public function update(Request $request, Post $post, Comment $comment) {
 
+        $notifications = Notification::all();
+
         $validatedData = $request -> validate([
             'body' => 'required',
         ]);
@@ -112,7 +114,7 @@ class CommentController extends Controller {
 
         session() -> flash('message', 'Comment successfully edited!');
 
-        return view('posts.show', ['post' => $post]);
+        return view('posts.show', ['post' => $post, 'notifications' => $notifications]);
     }
 
     /**
