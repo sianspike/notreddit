@@ -2,6 +2,7 @@
 
 @section('content')
 
+    <!-- Edit comment -->
     <form method="POST" action="{{ route('comments.update', ['post' => $post, 'comment' => $comment]) }}" style="margin: 10rem auto; width: 50%; text-align: center;">
         @csrf
         <label for="body" class="visually-hidden">Body</label>
@@ -10,6 +11,7 @@
         <a href="{{ route('posts.show', ['post' => $post]) }}" style="margin-top: 1rem; margin-bottom: 1rem;">Cancel</a>
     </form>
 
+    <!-- Delete comment -->
     <form method="POST" action="{{ route('comments.destroy', ['post' => $post, 'comment' => $comment]) }}" style="margin: 10rem auto; width: 50%; text-align: center;">
         @csrf
         @method('DELETE')

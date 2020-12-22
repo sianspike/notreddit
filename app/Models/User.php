@@ -40,16 +40,16 @@ class User extends Authenticatable {
 
     public function posts() {
 
-        return $this->hasMany('App\Models\Post');
+        return $this -> hasMany('App\Models\Post');
     }
 
     public function comments() {
 
-        return $this->hasMany('App\Models\Comment');
+        return $this -> hasMany('App\Models\Comment');
     }
 
     public function notifications() {
 
-        return $this->hasMany('App\Models\Notification');
+        return $this -> hasMany('App\Models\Notification');
     }
 }

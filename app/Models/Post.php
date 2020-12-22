@@ -15,19 +15,18 @@ class Post extends Model
     private $image_url;
     private $id;
 
-
     public function user() {
 
-        return $this->belongsTo('App\Models\User');
+        return $this -> belongsTo('App\Models\User');
     }
 
     public function comments() {
 
-        return $this->hasMany('App\Models\Comment');
+        return $this -> hasMany('App\Models\Comment');
     }
 
     public function tags() {
 
-        return $this->belongsToMany('App\Models\Tag');
+        return $this -> belongsToMany('App\Models\Tag');
     }
 }

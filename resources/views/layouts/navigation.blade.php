@@ -58,6 +58,7 @@
     </div>
 </nav>
 
+<!-- Add notifications to notifications drop down -->
 <script>
     const notificationsWrapper = $('#notifications');
     const notificationsToggle = notificationsWrapper.find('a[data-toggle]');
@@ -69,7 +70,7 @@
         notificationsWrapper.hide();
     }
     // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = true;
+    //Pusher.logToConsole = true;
 
     const pusher = new Pusher('740963311434c70e9665', {
         cluster: 'eu'

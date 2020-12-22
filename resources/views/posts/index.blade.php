@@ -13,6 +13,8 @@
     <div class="container">
         <ul>
             @foreach($posts as $post)
+
+                <!-- Post title and author -->
                 <div class="card text-center border-info" style="width: 50%; margin: 1rem auto;">
                     <div class="card-header">
                         <a href="{{ route('posts.edit', ['post' => $post]) }}" style="display:inline-block; margin-left: 95%; font-size: 0.7rem; color: black">Edit</a>
@@ -23,6 +25,7 @@
                         </p>
                     </div>
 
+                    <!-- Post content -->
                     <a href="{{ route('posts.show', ['post' => $post]) }}" style="text-decoration: none; color: black">
                         <div class="card-body">
                             <p class="card-text">{{ $post -> body }}</p>

@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tag extends Model
-{
+class Tag extends Model {
     use HasFactory;
 
     private $name;
 
     public function posts() {
 
-        return $this->belongsToMany('App\Models\Post');
+        return $this -> belongsToMany('App\Models\Post');
     }
 }

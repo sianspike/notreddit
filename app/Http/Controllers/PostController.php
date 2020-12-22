@@ -167,7 +167,7 @@ class PostController extends Controller {
 
                     } catch (QueryException $e) {
 
-
+                        session() -> flash('message', 'There was a problem editing the tag.');
                     }
                 }
             }
